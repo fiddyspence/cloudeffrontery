@@ -6,11 +6,11 @@ Use the cloudeffrontery program to output them into nginx or Apache to allow rea
 
 ```
 Usage: cloudeffrontery [options]
-    -c, --cloud CLOUD                Which cloud - aws or azure
-    -s, --service SERVICE            Which service (only applies to Amazon)
+    -c, --cloud CLOUD                Which cloud - aws or azure (default: aws)
+    -s, --service SERVICE            Which service (only applies to Amazon) (default: CLOUDFRONT)
     -d, --debug                      Some debug
-    -a, --action ACTION              What to output - nginx, apache or print (an array of addresses)
-    -r, --region REGION              Which region (only applies to Amazon)
+    -a, --action ACTION              What to output - nginx, apache or print (an array of addresses) (default: nginx)
+    -r, --region REGION              Which region (only applies to Amazon) (default: .*)
     -u, --url URL                    Custom URL to download the source from
 ```
 
