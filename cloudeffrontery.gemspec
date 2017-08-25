@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'cloudeffrontery'
-  spec.version     = '0.1'
+  spec.version     = '0.2'
   spec.homepage    = 'https://github.com/fiddyspence/cloudeffrontery'
   spec.license     = 'MIT'
   spec.author      = 'Chris Spence'
@@ -25,4 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec-collection_matchers', '~> 1.0'
   spec.add_development_dependency 'rake', '~> 0'
   spec.add_development_dependency 'webmock', '~> 3', '> 3'
+
+  spec.required_ruby_version = '>= 2.0'
 end
