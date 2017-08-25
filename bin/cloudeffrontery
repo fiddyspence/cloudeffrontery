@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+require_relative '../lib/cloudeffrontery.rb'
+require 'optparse'
+require 'ostruct'
+
+options = OpenStruct.new
+options.action = :nginx
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: cloudeffrontery [options]"
+
+  opts.on("-c", "--cloud CLOUD", "Which cloud - aws or azure (default: aws)") do |v|
+    if ['aws','azure'].member?(v)
+      options.cloud = "#{v}"
+    else
+      raise ArgumentError, "Option must be one of aws or azure"
+    end
+  end
+  opts.on("-s", "--service SERVICE", "Which service (only applies to Amazon - default: CLOUDFRONT)") do |v|
+    options.service = "#{v}" if options.cloud.nil? or options.cloud == 'aws'
+  end
+  opts.on("-d", "--debug", "Some debug") do |v|
+    options.debug = true
+  end
+  opts.on("-a", "--action ACTION", "What to output - nginx, apache or print (an array of addresses - default: nginx)") do |v|
+    options.action = v.to_sym if ['nginx','apache','print'].member?(v)
+  end
+  opts.on("-r", "--region REGION", "Which region (only applies to Amazon - default: .* )") do |v|
+    options.region = "#{v}"
+  end
+  opts.on("-u", "--url URL", "Custom URL to download the source from") do |v|
+    options.url = "#{v}"
+  end
+end.parse!
+
+thething = Cloudeffrontery.new
+options.each_pair do |k,v|
+  next if k == :action
+  thething.send("#{k.to_s}=",v)
+end
+
+puts thething.send(options.action)
